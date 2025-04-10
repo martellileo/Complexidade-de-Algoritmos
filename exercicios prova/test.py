@@ -135,7 +135,7 @@ print("---------------------------------------------------------")
 
 def encontrar_pares_ineficientes(lista, alvo):
     pares = []
-    for i in range (len(lista)):
+    for i in range(len(lista)):
         for j in range(i + 1, len(lista)):
             if lista[i] + lista[j] == alvo:
                 pares.append((lista[i], lista[j]))

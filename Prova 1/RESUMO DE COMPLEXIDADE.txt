@@ -1,0 +1,1430 @@
+=======================================
+ RESUMO DE COMPLEXIDADE - NOTAÇÃO BIG O
+=======================================
+
+O que é Big O?
+--------------
+Big O é uma forma de expressar como o tempo de execução ou o uso de memória de um algoritmo cresce com o tamanho da entrada (n).
+
+Principais Notações (por ordem de eficiência):
+----------------------------------------------
+O(1)       - Constante           → Acesso direto a um elemento (ex: lista[i])
+O(log n)   - Logarítmica         → Busca binária
+O(n)       - Linear              → Loop simples percorrendo todos os elementos
+O(n log n) - Linear-logarítmica  → Merge sort, Quick sort (caso médio)
+O(n²)      - Quadrática          → Dois loops aninhados (ex: bubble sort)
+O(2ⁿ)      - Exponencial         → Algoritmos de força bruta (ex: subconjuntos)
+O(n!)      - Fatorial            → Permutações, problemas de ordenação total
+
+Nível de Eficiência:
+Excelente → Bom → Razoável → Ruim → Horrível  
+O(1) → O(log n) → O(n) → O(n log n) → O(n²) → O(2^n) → O(n!)
+
+Como identificar a complexidade:
+-------------------------------
+1. Loops:
+   - Um único loop de n elementos             → O(n)
+   - Dois loops aninhados                     → O(n²)
+   - Loop que divide n pela metade            → O(log n)
+
+2. Recursão:
+   - Uma chamada recursiva                    → O(n)
+   - Divide o problema em partes (ex: mergesort) → O(n log n)
+
+3. Regras:
+   - Ignore constantes: O(2n) → O(n)
+   - Considere só o termo dominante: O(n + n²) → O(n²)
+
+Dicas Finais:
+-------------
+- Big O mede crescimento, não tempo real.
+- Normalmente se considera o pior caso.
+- Use a notação mais simples e dominante possível.
+
+
+
+
+
+
+
+
+
+
+==============================
+ ANÁLISE DE COMPLEXIDADE BIG O
+==============================
+
+1. def Calculo(arr, n):
+------------------------
+x = 2            → O(1)
+y = 3            → O(1)
+c = 0            → O(1)
+
+for i in range(n):        → O(n)
+    c = c + arr[i]        → O(n)
+    c = c + y             → O(n)
+
+return c                  → O(1)
+
+T(n) = 3 + 3n + 1 = 3n + 4 → O(n)
+
+--------------------------------------------
+
+2. int busca_linear(int lista[], int tamanho, int elemento):
+-------------------------------------------------------------
+for(i = 0; i < tamanho; i++)     → O(n)
+    if(lista[i] == elemento)     → O(1)
+    return i                     → O(1) no melhor caso
+
+return -1                        → O(1)
+
+Casos:
+- Melhor caso: elemento está na 1ª posição → O(1)
+- Pior caso: elemento não está            → O(n)
+- Caso médio: elemento está no meio       → O(n)
+
+Resumo:
+Melhor caso: O(1)
+Pior caso:   O(n)
+Médio caso:  O(n)
+
+--------------------------------------------
+
+3. def exemplo1(n):
+-------------------
+soma = 0             → O(1)
+for i in range(n):   → O(n)
+    soma += 1        → O(n)
+return soma          → O(1)
+
+T(n) = 2n + 3 → O(n)
+
+--------------------------------------------
+
+4. def exemplo2(n):
+-------------------
+for i in range(n):           → O(n)
+    for j in range(n):       → O(n)
+        print(i, j)          → O(1)
+
+T(n) = n * n * O(1) = O(n²)
+
+--------------------------------------------
+
+5. def exemplo3(n):
+-------------------
+for i in range(n):              → O(n)
+    for j in range(n):          → O(n)
+        for k in range(n):      → O(n)
+            print(i, j, k)      → O(1)
+
+T(n) = O(n³)
+
+--------------------------------------------
+
+6. def exemplo4(n):
+-------------------
+for i in range(n):              → O(n)
+    for j in range(i):          → O(i) no pior caso
+
+Total de iterações:
+0 + 1 + 2 + ... + (n - 1) = n(n-1)/2 → O(n²)
+
+T(n) = O(n²)
+
+--------------------------------------------
+
+7. def exemplo5(n):
+-------------------
+i = 1              → O(1)
+while i < n:       → O(log n)
+    print(i)       → O(log n)
+    i *= 2         → O(log n)
+
+T(n) = O(log n)
+
+--------------------------------------------
+
+8. def exemplo6(n):
+-------------------
+for i in range(n):       → O(n)
+    print(i)             → O(1)
+
+for j in range(n):       → O(n)
+    print(j)             → O(1)
+
+Total: O(n) + O(n) = O(n)
+
+--------------------------------------------
+
+9. def exemplo7(n):
+-------------------
+for i in range(n):             → O(n)
+    for j in range(n):         → O(n)
+        for k in range(100):   → O(1) (constante)
+
+Resultado: O(n² * 100) = O(n²)
+--------------------------------------
+
+| Função        | Complexidade                  |
+|---------------|-------------------------------|
+| Calculo       | O(n)                          |
+| busca_linear  | O(1) melhor, O(n) médio/pior  |
+| exemplo1      | O(n)                          |
+| exemplo2      | O(n²)                         |
+| exemplo3      | O(n³)                         |
+| exemplo4      | O(n²)                         |
+| exemplo5      | O(log n)                      |
+| exemplo6      | O(n)                          |
+| exemplo7      | O(n²)                         |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================
+ Tabela de Exemplos de Complexidade Big-O
+==========================================
+
+Big-O       | Cálculo         | C (Código)                               | Python (Código)
+------------|------------------|------------------------------------------|---------------------------------------------
+O(1)        | 1 operação       | int x = arr[3];                          | x = arr[3]
+            |                 | // acesso direto                         | # acesso direto
+
+O(log n)    | reduz pela      | int busca(int a[], int n, int x) {       | def busca(lista, x):
+            | metade          |   int l=0, r=n-1;                        |     l, r = 0, len(lista)-1
+            | a cada iteração |   while(l<=r){                          |     while l <= r:
+            |                 |     int m=(l+r)/2;                      |         m = (l + r)//2
+            |                 |     if(a[m]==x) return m;               |         if lista[m] == x: return m
+            |                 |     else if(a[m]<x) l=m+1;              |         elif lista[m] < x: l = m+1
+            |                 |     else r=m-1;                         |         else: r = m-1
+            |                 |   } return -1;                          |     return -1
+
+O(n)        | 1 laço simples  | int soma = 0;                           | soma = 0
+            |                 | for(int i=0;i<n;i++)                    | for i in lista:
+            |                 |   soma += arr[i];                       |     soma += i
+
+O(n log n)  | divide e        | // Merge Sort (resumo)                  | def merge_sort(lst):
+            | conquista       | void mergeSort(...){ ... }             |     if len(lst) <= 1: return lst
+            |                 | // divide e junta ordenado              |     mid = len(lst)//2
+            |                 |                                        |     l = merge_sort(lst[:mid])
+            |                 |                                        |     r = merge_sort(lst[mid:])
+            |                 |                                        |     return merge(l, r)
+
+O(n²)       | dois laços      | for(i=0;i<n;i++)                        | for i in range(n):
+            | aninhados       |   for(j=0;j<n;j++)                      |     for j in range(n):
+            |                 |     if(arr[j]>arr[j+1])                |         if arr[j]>arr[j+1]:
+            |                 |       swap(arr[j], arr[j+1]);          |             arr[j], arr[j+1] = arr[j+1], arr[j]
+
+O(2^n)      | recursão        | int fib(int n){                         | def fib(n):
+            | duplicada       |   if(n<=1) return n;                   |     if n <= 1: return n
+            |                 |   return fib(n-1)+fib(n-2);            |     return fib(n-1)+fib(n-2)
+
+O(n!)       | permutações     | void perm(int arr[], int l, r) {       | from itertools import permutations
+            | completas       |   if(l==r) print(arr);                 | list(permutations(arr))
+            |                 |   else                                 |
+            |                 |     for(int i=l;i<=r;i++)              |
+            |                 |       swap, permute, swap back         |
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+==========================================
+Algoritmos de Identificação de Primos
+==========================================
+
+Códigos em C
+------------
+
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdlib.h>
+
+int eh_primo(int num) {
+    if (num < 2) return 0; 
+    for (int i = 2; i < num; i++) { 
+        if (num % i == 0) return 0;
+    }
+    return 1; 
+}
+
+int eh_primo2(int num) {
+    if (num < 2) return 0;  
+    for (int i = 2; i <= (int)pow(num, 0.5); i++) {
+        if (num % i == 0) return 0;  
+    }
+    return 1;
+}
+
+int eh_primo3(int num) {
+    if (num < 2) return 0;
+
+    bool* sieve = (bool*)malloc((num + 1) * sizeof(bool));
+    for (int i = 0; i <= num; i++) sieve[i] = true;
+
+    sieve[0] = false;
+    sieve[1] = false;
+
+    for (int i = 2; i <= (int)sqrt((double)num); i++) {
+        if (sieve[i]) {
+            for (int j = i * i; j <= num; j += i) {
+                sieve[j] = false;
+            }
+        }
+    }
+
+    int is_prime = sieve[num];
+    free(sieve);
+    return is_prime;
+}
+
+int main(void) {
+    int n;
+    printf("Número primo até quando: ");
+    scanf("%d", &n);
+
+    clock_t inicio = clock();
+    int primo = eh_primo(n);
+    clock_t fim = clock();
+    double tempo = (double)(fim - inicio) / CLOCKS_PER_SEC; 
+    printf("Primo: %d , tempo: %f\n", primo, tempo);
+
+    inicio = clock();
+    int primo2 = eh_primo2(n);
+    fim = clock();
+    tempo = (double)(fim - inicio) / CLOCKS_PER_SEC; 
+    printf("Primo: %d , tempo: %f\n", primo2, tempo);
+
+    inicio = clock();
+    int primo3 = eh_primo3(n);
+    fim = clock();
+    tempo = (double)(fim - inicio) / CLOCKS_PER_SEC; 
+    printf("Primo: %d , tempo: %f\n", primo3, tempo);
+
+    return 0;
+}
+
+------------------------------------------------------------
+
+Códigos em Python
+------------------
+
+import time
+import numpy as np
+
+# O(n log log n)
+def sieve_numpy(limit):
+    sieve = np.ones(limit + 1, dtype=bool)
+    sieve[:2] = False
+    for num in range(2, int(limit ** 0.5) + 1):
+        if sieve[num]:
+            sieve[num * num::num] = False
+    return np.nonzero(sieve)[0]
+
+# O(√n)
+def eh_primo1(numero):
+    if numero < 2:
+        return False
+    for i in range(2, int(numero ** 0.5) + 1):
+        if numero % i == 0:
+            return False
+    return True
+
+# O(n)
+def eh_primo2(numero):
+    if numero < 2:
+        return False
+    for i in range(2, numero):
+        if numero % i == 0:
+            return False
+    return True
+
+start = time.time()
+for i in range(1, 100_000):
+    eh_primo1(i)
+end = time.time()
+print("Tempo eh_primo1 (√n):", end - start)
+
+start = time.time()
+for i in range(1, 100_000):
+    eh_primo2(i)
+end = time.time()
+print("Tempo eh_primo2 (n):", end - start)
+
+start = time.time()
+sieve_numpy(100_000)
+end = time.time()
+print("Tempo sieve_numpy:", end - start)
+
+------------------------------------------------------------
+
+Tabela Comparativa
+-------------------
+
+Função        | Descrição                             | Complexidade   | Observações
+--------------|----------------------------------------|----------------|-----------------------------------------
+eh_primo      | Testa divisores de 2 até n-1          | O(n)           | Mais lento para n grandes
+eh_primo2     | Testa divisores até √n                | O(√n)          | Otimizado para primos únicos
+eh_primo3     | Usa Crivo de Eratóstenes (em C)       | O(n log log n) | Excelente para listas de primos
+sieve_numpy   | Crivo vetorizado com NumPy (Python)   | O(n log log n) | Mais rápido no geral
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================
+ESTRUTURAS DE DADOS: LISTAS, PILHAS E FILAS
+==========================================
+
+1. OPERAÇÕES ELEMENTARES
+
+As principais operações nas estruturas básicas de dados são:
+- Inserção (adicionar um novo elemento)
+- Remoção (excluir um elemento)
+- Acesso/Consulta (verificar o valor de um elemento)
+- Busca (localizar um valor)
+- Atualização (alterar o valor)
+
+Cada estrutura lida com essas operações de maneira diferente.
+
+----------------------------------------------------------
+
+2. COMPARAÇÃO DE TEMPOS DE ACESSO (COMPLEXIDADE)
+
+Estrutura   | Inserção         | Remoção         | Acesso Direto
+------------|------------------|------------------|-------------------
+Lista       | O(1) no fim      | O(n) no meio     | O(1) com índice
+Pilha       | O(1) (push)      | O(1) (pop)       | O(n) (sem índice)
+Fila        | O(1) (enqueue)   | O(1) (dequeue)   | O(n)
+
+Observação: Em listas dinâmicas (como `list` em Python ou `std::vector` em C++), a inserção no meio ou início pode ser custosa.
+
+----------------------------------------------------------
+
+3. VANTAGENS E DESVANTAGENS
+
+LISTAS
+Vantagens:
+- Acesso direto por índice
+- Flexíveis para diversas operações
+
+Desvantagens:
+- Inserção e remoção no meio são custosas
+- Mais difícil de manter ordem em certas aplicações
+
+PILHAS (Stack - LIFO)
+Vantagens:
+- Simples de implementar
+- Rápido para inserir/remover no topo
+
+Desvantagens:
+- Acesso apenas ao último elemento
+- Não ideal para buscas ou inserções em posições arbitrárias
+
+FILAS (Queue - FIFO)
+Vantagens:
+- Útil para processamento em ordem (ex: tarefas)
+- Inserção e remoção são eficientes
+
+Desvantagens:
+- Acesso limitado (só no início e fim)
+- Buscar elementos no meio é lento
+
+----------------------------------------------------------
+
+4. EXEMPLOS PRÁTICOS
+
+Lista:
+- Catálogo de produtos (acesso por índice)
+- Lista de alunos
+
+Pilha:
+- Pilha de chamadas de funções
+- Desfazer/Refazer em editores de texto
+- Verificação de expressões matemáticas
+
+Fila:
+- Impressora (ordem de chegada)
+- Atendimento em suporte técnico
+- Processamento de tarefas em sistemas operacionais
+
+----------------------------------------------------------
+
+5. CÓDIGOS COMPARATÓRIOS
+
+===================== CÓDIGO EM C =====================
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define TAMANHO 100000
+
+// Lista simulada com array
+void operacoes_lista() {
+    int* lista = malloc(TAMANHO * sizeof(int));
+    for (int i = 0; i < TAMANHO; i++) {
+        lista[i] = i;
+    }
+    for (int i = 0; i < TAMANHO; i++) {
+        int x = lista[i]; // Acesso
+    }
+    free(lista);
+}
+
+// Pilha com array (LIFO)
+void operacoes_pilha() {
+    int* pilha = malloc(TAMANHO * sizeof(int));
+    int topo = -1;
+    for (int i = 0; i < TAMANHO; i++) {
+        pilha[++topo] = i; // push
+    }
+    while (topo >= 0) {
+        int x = pilha[topo--]; // pop
+    }
+    free(pilha);
+}
+
+// Fila com array circular (FIFO)
+void operacoes_fila() {
+    int* fila = malloc(TAMANHO * sizeof(int));
+    int frente = 0, tras = 0;
+    for (int i = 0; i < TAMANHO; i++) {
+        fila[tras++] = i; // enqueue
+    }
+    while (frente < tras) {
+        int x = fila[frente++]; // dequeue
+    }
+    free(fila);
+}
+
+int main() {
+    clock_t ini, fim;
+    double tempo;
+
+    ini = clock();
+    operacoes_lista();
+    fim = clock();
+    tempo = (double)(fim - ini) / CLOCKS_PER_SEC;
+    printf("Tempo lista: %.4fs\n", tempo);
+
+    ini = clock();
+    operacoes_pilha();
+    fim = clock();
+    tempo = (double)(fim - ini) / CLOCKS_PER_SEC;
+    printf("Tempo pilha: %.4fs\n", tempo);
+
+    ini = clock();
+    operacoes_fila();
+    fim = clock();
+    tempo = (double)(fim - ini) / CLOCKS_PER_SEC;
+    printf("Tempo fila: %.4fs\n", tempo);
+
+    return 0;
+}
+
+===================== CÓDIGO EM PYTHON =====================
+
+import time
+from collections import deque
+
+TAMANHO = 100000
+
+def operacoes_lista():
+    lista = []
+    for i in range(TAMANHO):
+        lista.append(i)
+    for i in lista:
+        _ = i  # leitura
+
+def operacoes_pilha():
+    pilha = []
+    for i in range(TAMANHO):
+        pilha.append(i)
+    while pilha:
+        pilha.pop()
+
+def operacoes_fila():
+    fila = deque()
+    for i in range(TAMANHO):
+        fila.append(i)
+    while fila:
+        fila.popleft()
+
+# Medindo tempos
+inicio = time.time()
+operacoes_lista()
+print(f"Tempo lista: {time.time() - inicio:.4f}s")
+
+inicio = time.time()
+operacoes_pilha()
+print(f"Tempo pilha: {time.time() - inicio:.4f}s")
+
+inicio = time.time()
+operacoes_fila()
+print(f"Tempo fila: {time.time() - inicio:.4f}s")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================
+Códigos comparatórios entre os três valores mais frequentes
+==========================================
+
+Comparação de três algoritmos
+- Objetivo: encontrar os três números mais frequentes em uma lista/vetor.
+- Implementações em C e Python.
+- Três abordagens com diferentes níveis de eficiência:
+  • Versão 1: Ingênua, sem otimização.
+  • Versão 2: Com ordenação baseada em estrutura auxiliar.
+  • Versão 3: Uso direto de array de frequência.
+
+===================== CÓDIGO EM C =====================
+
+Versão 1 – Ingênua (O(n²))
+
+#include <stdio.h>
+#include <time.h>
+#define TAMANHO 100
+
+int contar_repeticoes(int vetor[], int tamanho, int valor) {
+    int contagem = 0;
+    int i = 0;
+    while (i < tamanho) {
+        if (vetor[i] == valor) {
+            contagem++;
+        }
+        i++;
+    }
+    return contagem;
+}
+
+int verificar_existencia(int valores_unicos[], int qtd, int valor) {
+    int i = 0;
+    while (i < qtd) {
+        if (valores_unicos[i] == valor) {
+            return 1;
+        }
+        i++;
+    }
+    return 0;
+}
+
+void encontrar_tres_mais_repetidos(int vetor[], int tamanho, int top3[]) {
+    int contagens[TAMANHO] = {0}; 
+    int valores_unicos[TAMANHO] = {0}; 
+    int qtd_valores_unicos = 0;
+    int i = 0;
+
+    while (i < tamanho) {
+        int valor = vetor[i];
+        if (!verificar_existencia(valores_unicos, qtd_valores_unicos, valor)) {
+            valores_unicos[qtd_valores_unicos] = valor;
+            contagens[qtd_valores_unicos] = contar_repeticoes(vetor, tamanho, valor);
+            qtd_valores_unicos++;
+        }
+        i++;
+    }
+
+    top3[0] = -1; top3[1] = -1; top3[2] = -1;
+    int j = 0;
+    while (j < 3) {
+        int max_indice = -1, max_contagem = -1, k = 0;
+        while (k < qtd_valores_unicos) {
+            if (contagens[k] > max_contagem) {
+                max_contagem = contagens[k];
+                max_indice = k;
+            }
+            k++;
+        }
+        if (max_indice != -1) {
+            top3[j] = valores_unicos[max_indice];
+            contagens[max_indice] = -1;
+        }
+        j++;
+    }
+}
+
+Versão 2 – Simulando dicionário (O(n log n))
+
+#include <stdlib.h>
+
+typedef struct {
+    int numero;
+    int contagem;
+} Contador;
+
+int comparar(const void *a, const void *b) {
+    return ((Contador*)b)->contagem - ((Contador*)a)->contagem;
+}
+
+void encontrar_tres_mais_repetidos_dict(int vetor[], int tamanho, int top3[]) {
+    Contador dicionario[10] = {0};
+    for (int i = 0; i < 9; i++) {
+        dicionario[i].numero = i + 1;
+    }
+    for (int i = 0; i < tamanho; i++) {
+        dicionario[vetor[i] - 1].contagem++;
+    }
+    qsort(dicionario, 9, sizeof(Contador), comparar);
+    for (int i = 0; i < 3; i++) {
+        top3[i] = dicionario[i].numero;
+    }
+}
+
+Versão 3 – Otimizada com array de frequência (O(n))
+
+void encontrar_tres_mais_repetidos_freq(int vetor[], int tamanho, int top3[]) {
+    int frequencias[10] = {0};
+    for (int i = 0; i < tamanho; i++) {
+        frequencias[vetor[i]]++;
+    }
+    for (int j = 0; j < 3; j++) {
+        int max = -1, max_idx = -1;
+        for (int k = 1; k < 10; k++) {
+            if (frequencias[k] > max) {
+                max = frequencias[k];
+                max_idx = k;
+            }
+        }
+        top3[j] = max_idx;
+        frequencias[max_idx] = -1;
+    }
+}
+
+===================== CÓDIGO EM PYTHON =====================
+
+Versão 1 – Ingênua (O(n²))
+
+def encontrar_top3_ineficiente(lista):
+    unicos = []
+    contagens = []
+    for i in range(len(lista)):
+        if lista[i] not in unicos:
+            unicos.append(lista[i])
+            contagens.append(lista.count(lista[i]))
+    top3 = []
+    for _ in range(3):
+        max_idx = contagens.index(max(contagens))
+        top3.append(unicos[max_idx])
+        contagens[max_idx] = -1
+    return top3
+
+Versão 2 – Simulando dicionário (O(n log n))
+
+class Contador:
+    def __init__(self, numero):
+        self.numero = numero
+        self.contagem = 0
+
+def encontrar_top3_simulando_dict(lista):
+    dicionario = [Contador(i + 1) for i in range(9)]
+    for num in lista:
+        dicionario[num - 1].contagem += 1
+    dicionario.sort(key=lambda x: x.contagem, reverse=True)
+    return [dicionario[0].numero, dicionario[1].numero, dicionario[2].numero]
+
+Versão 3 – Otimizada com array de frequência (O(n))
+
+def encontrar_top3_otimizado(lista):
+    freq = [0] * 10
+    for num in lista:
+        freq[num] += 1
+    top3 = []
+    for _ in range(3):
+        max_idx = freq.index(max(freq[1:]))
+        top3.append(max_idx)
+        freq[max_idx] = -1
+    return top3
+
+==================== Comparação de Complexidade ====================
+
+| Versão       | Complexidade | Observações                             |
+|--------------|--------------|------------------------------------------|
+| Versão 1     | O(n²)        | Múltiplas varreduras, sem otimização     |
+| Versão 2     | O(n log n)   | Usa ordenação após contagem              |
+| Versão 3     | O(n)         | Acesso direto por índice (mais rápida)   |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+Algoritmos Interativos vs. Recursivos
+==========================================================
+
+Ao resolver problemas computacionais, podemos frequentemente escolher entre duas abordagens: iterativa e recursiva. Ambas têm vantagens e desvantagens, dependendo do problema e da linguagem utilizada.
+
+------------------------------------------------------------
+1. Definições
+
+- Interativo: Utiliza estruturas de repetição (como for, while) para resolver um problema.
+- Recursivo: Uma função chama a si mesma para resolver subproblemas menores, até atingir um caso base.
+
+------------------------------------------------------------
+2. Comparativo Geral
+
+Critério                  | Interativo                               | Recursivo
+--------------------------|-------------------------------------------|---------------------------------------------
+Leitura / Clareza         | Mais direto e explícito                   | Mais elegante para certos problemas
+Uso de Memória            | Geralmente mais eficiente (uso fixo)      | Pode usar mais memória (stack de chamadas)
+Performance               | Pode ser mais rápido                      | Pode ser lento se não otimizado
+Complexidade de Código    | Pode ser mais verboso                     | Pode ser mais conciso
+Debugging                 | Mais simples                              | Mais difícil (rastrear chamadas)
+
+------------------------------------------------------------
+3. Exemplo Clássico: Fatorial
+
+Em C:
+
+// Interativo
+int fatorial_iterativo(int n) {
+    int resultado = 1;
+    for (int i = 2; i <= n; i++) {
+        resultado *= i;
+    }
+    return resultado;
+}
+
+// Recursivo
+int fatorial_recursivo(int n) {
+    if (n == 0 || n == 1) return 1;
+    return n * fatorial_recursivo(n - 1);
+}
+
+Em Python:
+
+# Interativo
+def fatorial_iterativo(n):
+    resultado = 1
+    for i in range(2, n + 1):
+        resultado *= i
+    return resultado
+
+# Recursivo
+def fatorial_recursivo(n):
+    if n == 0 or n == 1:
+        return 1
+    return n * fatorial_recursivo(n - 1)
+
+------------------------------------------------------------
+4. Análise de Complexidade
+
+Algoritmo               | Complexidade de Tempo | Complexidade de Espaço
+------------------------|------------------------|--------------------------
+Fatorial Interativo     | O(n)                   | O(1)
+Fatorial Recursivo      | O(n)                   | O(n) (pela pilha de chamadas)
+
+------------------------------------------------------------
+5. Quando Usar Qual?
+
+Use recursão quando:
+- O problema tem uma definição naturalmente recursiva (ex: árvores, busca em profundidade, divisão e conquista).
+- O código fica mais legível.
+- O tamanho do problema é pequeno (evitando estouro de pilha).
+
+Use iteração quando:
+- A eficiência é essencial.
+- O problema pode ser facilmente resolvido com laços.
+- Há risco de estouro de stack.
+
+------------------------------------------------------------
+6. Conclusão
+
+A escolha entre recursão e iteração não é apenas técnica, mas também pragmática. Entender as limitações de memória e os benefícios de legibilidade ajuda a tomar uma decisão informada e eficiente para cada caso.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
+Algoritmos de Ordenação Simples
+==========================================================
+
+Os algoritmos de ordenação são fundamentais em ciência da computação. Aqui estudaremos três dos mais simples: Bubble Sort, Selection Sort e Insertion Sort. Embora não sejam os mais eficientes para grandes volumes de dados, são importantes para o aprendizado dos conceitos básicos de ordenação.
+
+------------------------------------------------------------
+1. BUBBLE SORT
+
+Descrição:
+- Compara pares adjacentes e os troca de lugar se estiverem fora de ordem.
+- Repete o processo até que a lista esteja ordenada.
+
+Funcionamento:
+- Após cada passagem completa, o maior elemento “borbulha” para o final.
+
+Código em C:
+int bubble_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+Código em Python:
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+------------------------------------------------------------
+2. SELECTION SORT
+
+Descrição:
+- Encontra o menor elemento da lista e o coloca na primeira posição.
+- Em seguida, repete o processo com o restante da lista.
+
+Funcionamento:
+- Divide a lista em duas partes: ordenada e não ordenada.
+- A cada passo, move o menor da parte não ordenada para a ordenada.
+
+Código em C:
+void selection_sort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int min_idx = i;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[j] < arr[min_idx]) {
+                min_idx = j;
+            }
+        }
+        int temp = arr[i];
+        arr[i] = arr[min_idx];
+        arr[min_idx] = temp;
+    }
+}
+
+Código em Python:
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+------------------------------------------------------------
+3. INSERTION SORT
+
+Descrição:
+- Insere os elementos um a um em uma posição adequada da parte já ordenada da lista.
+
+Funcionamento:
+- A cada passo, o elemento atual é comparado com os anteriores e inserido na posição correta.
+
+Código em C:
+void insertion_sort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {
+        int chave = arr[i];
+        int j = i - 1;
+        while (j >= 0 && arr[j] > chave) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        arr[j + 1] = chave;
+    }
+}
+
+Código em Python:
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        chave = arr[i]
+        j = i - 1
+        while j >= 0 and arr[j] > chave:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = chave
+
+------------------------------------------------------------
+4. ANÁLISE DE COMPLEXIDADE
+
+Algoritmo         | Melhor Caso | Caso Médio | Pior Caso | Espaço
+------------------|-------------|------------|-----------|--------
+Bubble Sort       | O(n)        | O(n²)      | O(n²)     | O(1)
+Selection Sort    | O(n²)       | O(n²)      | O(n²)     | O(1)
+Insertion Sort    | O(n)        | O(n²)      | O(n²)     | O(1)
+
+------------------------------------------------------------
+5. CONSIDERAÇÕES FINAIS
+
+- Bubble Sort é o mais intuitivo, mas geralmente o menos eficiente.
+- Selection Sort tem número fixo de comparações, mas muitas trocas.
+- Insertion Sort é eficiente para listas pequenas ou quase ordenadas.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------
+Exercícios
+-----------------------------------------
+
+
+1. O modelo RAM (Random Access Machine) é frequentemente utilizado na análise de desempenho de algoritmos. Explique o conceito do modelo RAM e descreva por que ele é útil para comparar tempos de execução de diferentes algoritmos.
+
+O modelo RAM é um modelo teórico de computador que assume que todas as operações básicas (como soma, subtração, atribuição, comparação, acesso à memória) são realizadas em tempo constante, ou seja, O(1). Ele não considera limitações físicas de hardware como caches, paralelismo ou acesso ao disco.
+
+É útil porque permite analisar algoritmos de forma simplificada e comparativa, fornecendo uma métrica abstrata para avaliar a eficiência de diferentes algoritmos sem depender do sistema operacional, da linguagem ou do computador utilizado.
+
+------------------------------------------------------------
+
+2. Considere as seguintes funções que representam o tempo de execução de diferentes algoritmos:
+(Exemplo genérico de análise)
+- f(n) = n → Complexidade linear, O(n)
+- f(n) = n² → Complexidade quadrática, O(n²)
+- f(n) = log(n) → Complexidade logarítmica, O(log n)
+- f(n) = 2ⁿ → Complexidade exponencial, O(2ⁿ)
+
+Quanto mais lenta a taxa de crescimento da função, mais eficiente é o algoritmo para grandes entradas.
+
+------------------------------------------------------------
+
+3. Analise a complexidade assintótica do seguinte trecho de código e justifique sua resposta:
+
+for i in range(n):
+    for j in range(n):
+        print(i, j)
+
+Esse código possui dois laços aninhados, cada um executando n vezes. Assim, o número total de iterações é n * n, o que nos leva a uma complexidade O(n²), ou seja, quadrática.
+
+------------------------------------------------------------
+
+4. Explique como podemos medir o tempo de execução de uma função em Python. Em seguida, forneça um exemplo de código que implementa um benchmarking comparando duas funções diferentes.
+Podemos usar o módulo `time` para medir o tempo de execução:
+
+
+def func1():
+    return sum([i for i in range(10000)])
+
+def func2():
+    total = 0
+    for i in range(10000):
+        total += i
+    return total
+
+inicio = time.time()
+func1()
+fim = time.time()
+print("Tempo func1:", fim - inicio)
+
+inicio = time.time()
+func2()
+fim = time.time()
+print("Tempo func2:", fim - inicio)
+------------------------------------------------------------
+
+5. Compare o tempo de acesso e inserção em três estruturas de dados: listas, pilhas e filas. Qual delas apresenta melhor desempenho para cada operação e por quê?
+
+| Estrutura | Acesso aleatório | Inserção no fim | Remoção no início |
+|-----------|------------------|------------------|--------------------|
+| Lista     | O(1)             | O(1)             | O(n)               |
+| Pilha     | O(1) (topo)      | O(1)             | O(1)               |
+| Fila      | O(1) (frente)    | O(1)             | O(1) (com deque)   |
+
+- Listas são boas para acesso rápido, mas ruins para remoções no início.
+- Pilhas (LIFO) são rápidas para inserir/remover no topo.
+- Filas (FIFO) com `collections.deque` são eficientes em ambas inserções e remoções nas extremidades.
+
+------------------------------------------------------------
+
+6. Considere a sequência de Fibonacci. Implemente um algoritmo iterativo e um recursivo para calcular F(n) e compare o tempo de execução dos dois métodos para n = 30. Explique os resultados obtidos.
+
+
+import time
+
+def fibonacci_iterativo(n):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+
+def fibonacci_recursivo(n):
+    if n <= 1:
+        return n
+    return fibonacci_recursivo(n-1) + fibonacci_recursivo(n-2)
+
+inicio = time.time()
+print("Iterativo:", fibonacci_iterativo(30))
+print("Tempo:", time.time() - inicio)
+
+inicio = time.time()
+print("Recursivo:", fibonacci_recursivo(30))
+print("Tempo:", time.time() - inicio)
+
+
+- O iterativo é muito mais rápido (O(n)) que o recursivo puro (O(2ⁿ)), pois o recursivo repete cálculos desnecessariamente.
+
+------------------------------------------------------------
+
+7. Implemente os algoritmos Bubble Sort, Selection Sort e Insertion Sort em Python. Em seguida, compare o tempo de execução desses algoritmos para ordenar listas de tamanhos 1000, 5000 e 10000 elementos.
+
+import time
+import random
+
+def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+def insertion_sort(arr):
+    for i in range(1, len(arr)):
+        chave = arr[i]
+        j = i - 1
+        while j >= 0 and chave < arr[j]:
+            arr[j + 1] = arr[j]
+            j -= 1
+        arr[j + 1] = chave
+
+def testar_sort(algoritmo, tamanho):
+    arr = [random.randint(0, 10000) for _ in range(tamanho)]
+    inicio = time.time()
+    algoritmo(arr)
+    fim = time.time()
+    print(f"{algoritmo.__name__} com {tamanho} elementos: {fim - inicio:.4f} segundos")
+
+for tamanho in [1000, 5000, 10000]:
+    testar_sort(bubble_sort, tamanho)
+    testar_sort(selection_sort, tamanho)
+    testar_sort(insertion_sort, tamanho)
+
+
+- Todos têm complexidade O(n²), mas o Insertion Sort tende a ser mais rápido com listas parcialmente ordenadas.
+
+------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-----------------------------------------
+Exercícios: Algoritmos Iniciais e Otimizações
+-----------------------------------------
+
+Exemplo 1: Encontrar o maior número
+
+Versão ineficiente (complexidade O(n²)):
+
+    def encontrar_maior_ineficiente(lista):
+        for i in range(len(lista)):
+            maior = True
+            for j in range(len(lista)):
+                if lista[j] > lista[i]:
+                    maior = False
+                    break
+            if maior:
+                return lista[i]
+
+Versão otimizada (complexidade O(n)):
+
+    def encontrar_maior_otimizado(lista):
+        maior = lista[0]
+        for num in lista:
+            if num > maior:
+                maior = num
+        return maior
+
+Teste:
+
+    numeros = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+    print("Maior número (ineficiente):", encontrar_maior_ineficiente(numeros))
+    print("Maior número (otimizado):", encontrar_maior_otimizado(numeros))
+----------------------------------------------------------------------------------
+
+Exemplo 2: Ordenar três números
+
+Versão ineficiente:
+
+    def encontrar_ordem_ineficiente(a, b, c):
+        numeros = [a, b, c]
+        for i in range(len(numeros)):
+            maior = True
+            for j in range(len(numeros)):
+                if numeros[j] > numeros[i]:
+                    maior = False
+                    break
+            if maior:
+                maior_num = numeros[i]
+        for i in range(len(numeros)):
+            menor = True
+            for j in range(len(numeros)):
+                if numeros[j] < numeros[i]:
+                    menor = False
+                    break
+            if menor:
+                menor_num = numeros[i]
+        meio_num = sum(numeros) - maior_num - menor_num
+        return maior_num, meio_num, menor_num
+
+Versão otimizada:
+
+    def encontrar_ordem_otimizado(a, b, c):
+        numeros = sorted([a, b, c], reverse=True)
+        return numeros[0], numeros[1], numeros[2]
+
+Teste:
+
+    a, b, c = 3, 1, 4
+    maior, meio, menor = encontrar_ordem_ineficiente(a, b, c)
+    print("Ineficiente -> Maior:", maior, "Meio:", meio, "Menor:", menor)
+    maior, meio, menor = encontrar_ordem_otimizado(a, b, c)
+    print("Otimizado   -> Maior:", maior, "Meio:", meio, "Menor:", menor)
+----------------------------------------------------------------------------------
+
+Exemplo 3: Elemento mais frequente
+
+Versão ineficiente:
+
+    def mais_frequente_ineficiente(lista):
+        max_contagem = 0
+        mais_frequente = None
+        for i in lista:
+            contagem = 0
+            for j in lista:
+                if i == j:
+                    contagem += 1
+            if contagem > max_contagem:
+                max_contagem = contagem
+                mais_frequente = i
+        return mais_frequente
+
+Versão otimizada:
+
+    from collections import Counter
+
+    def mais_frequente_otimizado(lista):
+        contagem = Counter(lista)
+        return contagem.most_common(1)[0][0]
+
+Teste:
+
+    lista_numeros = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
+    print("Mais frequente (ineficiente):", mais_frequente_ineficiente(lista_numeros))
+    print("Mais frequente (otimizado):", mais_frequente_otimizado(lista_numeros))
+----------------------------------------------------------------------------------
+
+
+Exemplo 4: Encontrar pares com soma igual ao alvo
+
+Versão ineficiente:
+
+    def encontrar_pares_ineficiente(lista, alvo):
+        pares = []
+        for i in range(len(lista)):
+            for j in range(i + 1, len(lista)):
+                if lista[i] + lista[j] == alvo:
+                    pares.append((lista[i], lista[j]))
+        return pares
+
+Versão otimizada:
+
+    def encontrar_pares_otimizado(lista, alvo):
+        vistos = set()
+        pares = set()
+        for num in lista:
+            complemento = alvo - num
+            if complemento in vistos:
+                pares.add(tuple(sorted((num, complemento))))
+            vistos.add(num)
+        return list(pares)
+
+Teste:
+
+    print("Pares (ineficiente):", encontrar_pares_ineficiente([1, 2, 3, 4, 5], 6))
+    print("Pares (otimizado):", encontrar_pares_otimizado([1, 2, 3, 4, 5], 6))
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Exemplo 5: Divisão e conquista para máximo e mínimo
+
+    def encontrar_max_min(lista):
+        if len(lista) == 1:
+            return lista[0], lista[0]
+        elif len(lista) == 2:
+            return (max(lista), min(lista))
+        else:
+            meio = len(lista) // 2
+            max1, min1 = encontrar_max_min(lista[:meio])
+            max2, min2 = encontrar_max_min(lista[meio:])
+            return max(max1, max2), min(min1, min2)
+
+    numeros = [3, 7, 2, 8, 5, 1]
+    maior, menor = encontrar_max_min(numeros)
+    print("Máximo:", maior, "Mínimo:", menor)
+---------------------------------------------------------------------------------------------------------------------------
+
+
+Exemplo 6: Soma dos pares
+
+Versão ineficiente:
+
+    def soma_dos_pares(lista):
+        soma = 0
+        for i in range(len(lista)):
+            if lista[i] % 2 == 0:
+                for j in range(1):  # loop inútil
+                    soma += lista[i]
+        return soma
+
+Versão otimizada:
+
+    def soma_dos_pares_otimizado(lista):
+        return sum(x for x in lista if x % 2 == 0)
+
+Teste:
+
+    print("Soma dos pares (ineficiente):", soma_dos_pares(numeros))
+    print("Soma dos pares (otimizado):", soma_dos_pares_otimizado(numeros))
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
